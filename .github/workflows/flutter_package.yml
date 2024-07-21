@@ -62,6 +62,8 @@ on:
     secrets:
       ssh_key:
         required: false
+      flutter_options:
+        required: false  
 
 jobs:
   build:
@@ -97,6 +99,8 @@ jobs:
           very_good packages get --recursive --ignore=${{inputs.package_get_excludes}}
 
       - name: ⚙️ Run Setup
+        env:
+          flutter_options: ${{secrets.flutter_options}}
         if: "${{inputs.setup != ''}}"
         run: ${{inputs.setup}}
 
